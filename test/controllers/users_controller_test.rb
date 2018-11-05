@@ -18,9 +18,16 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select "li", 8
   end
 
-  test "should reject if not logged in" do
+  test "index: should send back to login page if not logged in" do
     get users_path
     follow_redirect!
     assert_template 'sessions/new'
   end
-end
+
+  test "index: should show index if logged in" do
+    post users_path, params: { user: { first_name: @user.first_name, last_name: @user.last_name, mail: @user.email, password: 'foobar', password_confirmation: "foobar" } }
+    post login_path, params: { session: { email:@user.email, password: 'foobar' } }
+    get users_path
+    assert_template 'users/index'
+  end
+end  

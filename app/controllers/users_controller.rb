@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
 
   def show
+    unless logged_in? && @current_user.id == params[:id].to_i
+      flash[:info] = "Il faut te connecter, petit malin!"
+      redirect_to login_path
+    end
     @user = User.find(params[:id])
   end
 

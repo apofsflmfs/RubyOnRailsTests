@@ -14,11 +14,21 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     post users_path, params: { user: { first_name: @user.first_name, last_name: @user.last_name, mail: @user.email, password: 'foobar', password_confirmation: "foobar" } }
 
     post login_path, params: { session: { email: @user.email, password: 'foobar' } }
+
   end
 
-  test "login : should show error messages if blank fields or wrong parameter" do
+  test "login : should show error messages if wrong combination of email / parameter or wrong parameters" do
     post users_path, params: { user: { first_name: " ", last_name: " ", email: " ", password: " ", password_confirmation: " " } }
-    assert_select "li", 10
+
+    post login_path, params: { session: { email:"coco@eami.com", password: 'fsdfsdfsdggoobarddd' } }
+    assert_select "li", 4
+
+    post login_path, params: { session: { email: @user.email, password: '' } }
+    assert_select "li", 4
+
+    post login_path, params: { session: { email:"", password: 'foobar' } }
+    assert_select "li", 4
+
   end
 
 end
