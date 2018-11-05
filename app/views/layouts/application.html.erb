@@ -15,9 +15,9 @@
 
     <div class="container">
       <%= render '/layouts/navbar' %>
-      
+
       <% if flash[:info]%>
-        <p class="alert alert-info"><%=flash[:info]%></p> 
+        <p class="alert alert-info"><%=flash[:info]%></p>
       <% elsif flash[:danger]%>
         <p class="alert alert-danger"><%=flash[:danger]%></p>
       <% elsif flash[:success]%>
