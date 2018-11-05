@@ -19,6 +19,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    unless logged_in?
+      flash[:info] = "Merci de vous connecter, petit malin..."
+      redirect_to login_path
+    end
+    @users = User.all
+  end
 
   private
 

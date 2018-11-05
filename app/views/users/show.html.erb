@@ -1,2 +1,15 @@
 <h1>Bienvenue</h1>
-<%= @user.first_name %>, <%= @user.last_name %>, <%= @user.email %>
+<div class="row">
+  <div class="card col-lg-3" >
+    <div class="card-body">
+      <div style="diplay: flex">
+        <h5 class="card-title"> 
+          Membre N°<%= @user.id %>  
+        </h5>
+      </div>
+      <h6 class="card-subtitle mb-2 text-muted"> <strong>Email</strong> : <%=@user.email%></h6>
+      <p class="card-text" > <strong>Nom</strong>: <%= @user.last_name %> </p>
+      <p class="card-text" > <strong>Prénom</strong>: <%= @user.first_name %> </p>
+    </div>
+  </div>
+</div>
