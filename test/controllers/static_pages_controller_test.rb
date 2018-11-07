@@ -11,7 +11,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "home : should show the right links when loggin" do
-    post login_path, params: { session: { email:    @user.email, password: 'foobar' } }
+    post login_path, params: { session: { email: @user.email, password: 'foobar' } }
     get root_path
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path

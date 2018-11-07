@@ -43,9 +43,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show: show page only to logged users" do
-    post users_path, params: { user: { first_name: @user.first_name, last_name: @user.last_name, mail: @user.email, password: 'foobar', password_confirmation: "foobar" } }
-    post login_path, params: { session: { email:@user.email, password: 'foobar' } }
     get user_path(@user.id)
+    assert_template 'sessions/new'
   end
 
   test "show: should send back to login page if not logged in" do
